@@ -1,5 +1,6 @@
 from typing import List, Optional, Dict
 from fastapi import FastAPI, Query, UploadFile, HTTPException
+from pydantic import BaseModel
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 app = FastAPI()
@@ -7,7 +8,18 @@ app = FastAPI()
 items = ["severity", "disease", "solutions", "meds"]
 
 
+
+class Item(BaseModel):
+    name: str
+    price: float
+    is_offer: Optional[bool] = None
+
+@app.post("/items/", status_code=201)
+async def create_item(item: Item):
+    return {**item.model_dump(), "id": 1}	# item.model_dump() converts a Pydantic model instance into a standard 
+											# Python dictionary so that its data can be easily manipulated or returned as a JSON response.
 class Settings(BaseSettings):
+
     API_KEY: str = ""
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
 
@@ -70,3 +82,9 @@ user_scores: Dict[str, List[int]] = {
     "Boby": [95, 88, 91],
     "Charlize": [100, 100, 99]
 }
+
+@app.get("/users/{user_id}")
+async def get_user(user_id: int):
+    return {"user_id": user_id}
+
+
