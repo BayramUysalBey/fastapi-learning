@@ -1,5 +1,5 @@
-from typing import List, Optional, Dict
-from fastapi import FastAPI, Query, UploadFile, HTTPException
+from typing import List, Dict
+from fastapi import FastAPI, UploadFile, HTTPException
 from pydantic import BaseModel
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -12,7 +12,7 @@ items = ["severity", "disease", "solutions", "meds"]
 class Item(BaseModel):
     name: str
     price: float
-    is_offer: Optional[bool] = None
+    is_offer: bool = False
 
 @app.post("/items/", status_code=201)
 async def create_item(item: Item):
@@ -43,7 +43,7 @@ async def searching(q: str, limit: int = 10):
 
 
 @app.get("/users/{user_id}/items")
-async def get_user_items(user_id: int, category: Optional[str] = None):
+async def get_user_items(user_id: int, category: str):
     return {"user_id": user_id, "category": category}
 
 
@@ -86,5 +86,4 @@ user_scores: Dict[str, List[int]] = {
 @app.get("/users/{user_id}")
 async def get_user(user_id: int):
     return {"user_id": user_id}
-
 

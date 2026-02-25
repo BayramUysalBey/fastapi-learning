@@ -85,4 +85,3 @@ def test_scope_demo(function_fixture):
     print("Running the actual test code")
     assert True
 # pytest -s test.py  # -s flag is used to print the output of the print statements
-
