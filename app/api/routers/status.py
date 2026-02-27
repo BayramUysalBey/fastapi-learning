@@ -5,7 +5,7 @@ router = APIRouter()
 
 @router.get("/", response_model=dict)
 async def main_home():
-    return {"message": "Welcome to the Dementia Tracker V1 API"}
+    return {"message": "Welcome to the Testing Area"}
 
 @router.get("/health", response_model=HealthStatus)
 async def health():
