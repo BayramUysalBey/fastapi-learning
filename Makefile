@@ -13,23 +13,23 @@ install: requirements.txt
 
 # FastAPI run command
 run:
-	$(PYTHON) -m uvicorn app:app --reload
+	$(PYTHON) -m uvicorn app.main:app --reload
 
 build: 
-	docker build -t dementia-tracker-v2 .
+	docker build -t dementia-tracker-v1 .
 
 docker-run:
-	docker run -p 8000:8000 dementia-tracker-v2
+	docker run -p 8000:8000 dementia-tracker-v1
 
 test:
-	$(PYTHON) -m pytest test.py -v
+	$(PYTHON) -m pytest tests/test.py -v
 
 clean:
 ifeq ($(OS),Windows_NT)
 	if exist "build" rd /s /q build
 	if exist "dist" rd /s /q dist
-	if exist "dementia_tracker_v2.egg-info" rd /s /q dementia_tracker_v2.egg-info
+	if exist "dementia_tracker_v1.egg-info" rd /s /q dementia_tracker_v1.egg-info
 else
-	rm -rf build dist dementia_tracker_v2.egg-info
+	rm -rf build dist dementia_tracker_v1.egg-info
 	find . -type d -name "__pycache__" -exec rm -rf {} +
 endif
