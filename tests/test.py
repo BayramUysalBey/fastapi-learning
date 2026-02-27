@@ -2,8 +2,15 @@ import pytest
 import os
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
-from app import app
+from app.main import app
 
+
+def test_main_home(client):
+	response = client.get("/")
+	assert response.status_code == 200
+	assert response.json() == {
+		"message": "Welcome to the Testing Area"
+	}
 
 def add(a, b):
 	return a + b
@@ -40,7 +47,7 @@ async def main():
 def test_main(client):
       response = client.get("/")
       assert response.status_code == 200
-      assert response.json() == {"message": "Hello World"}
+      assert response.json() == {"message": "Welcome to the Dementia Tracker V1 API"}
 
 def test_get_user_invalid_id(client):
     response = client.get("/users/not-an-integer")
