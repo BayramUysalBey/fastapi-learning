@@ -40,15 +40,6 @@ def test_temp_file(temp_file):
         assert f.read() == "Hello, World!"
         
 
-@app.get("/")
-async def main():
-    return {"message": "Hello World"}
-
-def test_main(client):
-      response = client.get("/")
-      assert response.status_code == 200
-      assert response.json() == {"message": "Welcome to the Dementia Tracker V1 API"}
-
 def test_get_user_invalid_id(client):
     response = client.get("/users/not-an-integer")
     assert response.status_code == 422

@@ -3,8 +3,8 @@ from app.api.routers import status, items
 from app.core.settings import settings
 
 app = FastAPI(
-    title="Testing Area",
-    description="Testing Area for FastAPI",
+    title="FastAPI Learning",
+    description="Learning Project for FastAPI",
     version="1.0.0"
 )
 

@@ -1,5 +1,5 @@
-# Dementia Tracker v2
+# FastAPI Learning Project
 
-preparation repository for the project
+Learning repository for FastAPI core concepts and modular architecture.
 
 [26.02.2026] - starting the APIRouter
