@@ -1,24 +1,26 @@
-from pydantic import BaseModel
-from typing import List, Optional
+from uuid import UUID
+from pydantic import BaseModel, EmailStr
+from typing import Optional
 
 class Item(BaseModel):
-    id: int
+    id: UUID
     name: str
     price: float
     is_offer: bool = False
-    user_id: int
+    user_id: UUID
     category: str
 
 class ItemCreate(BaseModel):
     name: str
     price: float
     is_offer: Optional[bool] = False
-    user_id: int
+    user_id: UUID
     category: str
 
 class User(BaseModel):
-    id: int
+    id: UUID
     username: str
+    email: EmailStr
 
 class FileUploadResponse(BaseModel):
     filename: str
