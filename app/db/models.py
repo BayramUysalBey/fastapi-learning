@@ -13,6 +13,7 @@ class User(Base):
 	)
 	username: Mapped[str] = mapped_column(String(255))
 	email: Mapped[str] = mapped_column(String(255), server_default="unknown@example.com")
+	hashed_password: Mapped[str] = mapped_column(String(255))
 
 class Item(Base):
 	__tablename__ = "items"
